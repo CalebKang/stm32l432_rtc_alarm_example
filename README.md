@@ -1,6 +1,6 @@
 # stm32l432_rtc_alarm_example
 
-This is an example for RTC ALARM ST provied.
+This is an example for RTC ALARM ST provided.
 
 The alarm makes interrupt in every 24hours. 
 
