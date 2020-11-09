@@ -54,8 +54,8 @@ void MX_RTC_Init(void)
 
   /** Initialize RTC and set the Time and Date
   */
-  sTime.Hours = 0;
-  sTime.Minutes = 0;
+  sTime.Hours = 17;
+  sTime.Minutes = 45;
   sTime.Seconds = 0;
   sTime.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
   sTime.StoreOperation = RTC_STOREOPERATION_RESET;
@@ -74,13 +74,13 @@ void MX_RTC_Init(void)
   }
   /** Enable the Alarm A
   */
-  sAlarm.AlarmTime.Hours = 23;
-  sAlarm.AlarmTime.Minutes = 59;
+  sAlarm.AlarmTime.Hours = 17;
+  sAlarm.AlarmTime.Minutes = 45;
   sAlarm.AlarmTime.Seconds = 59;
   sAlarm.AlarmTime.SubSeconds = 0;
   sAlarm.AlarmTime.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
   sAlarm.AlarmTime.StoreOperation = RTC_STOREOPERATION_RESET;
-  sAlarm.AlarmMask = RTC_ALARMMASK_DATEWEEKDAY|RTC_ALARMMASK_HOURS;
+  sAlarm.AlarmMask = RTC_ALARMMASK_DATEWEEKDAY;
   sAlarm.AlarmSubSecondMask = RTC_ALARMSUBSECONDMASK_NONE;
   sAlarm.AlarmDateWeekDaySel = RTC_ALARMDATEWEEKDAYSEL_WEEKDAY;
   sAlarm.AlarmDateWeekDay = RTC_WEEKDAY_MONDAY;
