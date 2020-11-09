@@ -4,6 +4,8 @@ This is an example for RTC ALARM ST provied.
 
 The alarm makes interrupt in every 24hours. 
 
+<pre>
+<code>
   sAlarm.AlarmTime.Hours = 23;
   sAlarm.AlarmTime.Minutes = 59;
   sAlarm.AlarmTime.Seconds = 59;
@@ -19,3 +21,5 @@ The alarm makes interrupt in every 24hours.
   {
     Error_Handler();
   }
+</pre>
+</code>
