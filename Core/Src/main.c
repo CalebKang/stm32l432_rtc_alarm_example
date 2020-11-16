@@ -65,7 +65,7 @@ void SystemClock_Config(void);
 /* USER CODE BEGIN 0 */
 static uint16_t count_split(uint8_t *buffer, uint16_t len, uint8_t delim);
 static uint8_t *split_str(uint8_t *buffer, uint16_t len, uint16_t pos, uint8_t delim);
-uint8_t strings[] = "100|200|300|400|500|600|700|800|900|1111|2222|3333|44444|55555|66666|77777|888888|99999*";
+uint8_t strings[] = "100|200|300|400|500|600|700|800|900|1111|2222|3333|44444|55555|66666|77777|888888|99999|";
 /* USER CODE END 0 */
 
 /**
@@ -206,7 +206,7 @@ static uint16_t count_split(uint8_t *buffer, uint16_t len, uint8_t delim)
       count++;
   }
 
-  if(buffer[len-1] != delim)
+  if((buffer[len-1] != delim) && (count > 0))
     count++;
 
   return count;
