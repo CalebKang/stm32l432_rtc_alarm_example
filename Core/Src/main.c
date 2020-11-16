@@ -26,6 +26,8 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -61,7 +63,9 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+static uint16_t count_split(uint8_t *buffer, uint16_t len, uint8_t delim);
+static uint8_t *split_str(uint8_t *buffer, uint16_t len, uint16_t pos, uint8_t delim);
+uint8_t strings[] = "100|200|300|400|500|600|700|800|900|1111|2222|3333|44444|55555|66666|77777|888888|99999*";
 /* USER CODE END 0 */
 
 /**
@@ -96,6 +100,14 @@ int main(void)
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
   printf("Hello STM32L412 !!\r\n");
+
+  uint16_t d_count;
+  d_count = count_split(strings, strlen((char *)strings), '|');
+
+  for(int i=0; i<d_count;i++)
+  {
+    printf("%d\r\n", atoi((char *)split_str(strings, strlen((char *)strings), i,'|')));
+  }
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -179,6 +191,48 @@ void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *rtc)
   HAL_RTC_GetDate(&hrtc, &sdatestructureget, RTC_FORMAT_BIN);
   /* Display time Format : hh:mm:ss */
   printf("%02d:%02d:%02d\r\n",stimestructureget.Hours, stimestructureget.Minutes, stimestructureget.Seconds);
+}
+
+static uint16_t count_split(uint8_t *buffer, uint16_t len, uint8_t delim)
+{
+  uint16_t count = 0;
+
+  if(len == 0)
+    return 0;
+
+  for(int i=0; i<len; i++)
+  {
+    if(buffer[i] == delim)
+      count++;
+  }
+
+  if(buffer[len-1] != delim)
+    count++;
+
+  return count;
+}
+
+static uint8_t *split_str(uint8_t *buffer, uint16_t len, uint16_t pos, uint8_t delim)
+{
+  uint16_t temp_pos=0;
+  uint8_t *temp_ptr = buffer;
+
+  for(int i=0; i<len; i++)
+  {
+    if(buffer[i] == delim)
+    {
+      if(temp_pos == pos)
+        return temp_ptr;
+      else
+      {
+        if((i+1) < len)
+          temp_ptr = &buffer[i+1];
+      }
+      temp_pos++;
+    }
+  }
+
+  return temp_ptr;
 }
 /* USER CODE END 4 */
 
